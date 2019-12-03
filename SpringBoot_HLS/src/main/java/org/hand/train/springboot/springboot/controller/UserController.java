@@ -5,6 +5,7 @@ import org.hand.train.springboot.springboot.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -55,7 +56,7 @@ public class UserController {
      * @date 18:40 2019/12/3
      */
     @PostMapping("/add")
-    UserInfo addUser(@RequestBody UserInfo userInfo) {
+    UserInfo addUser(@RequestBody @Valid UserInfo userInfo) {
         userService.addUser(userInfo);
         return userInfo;
     }
@@ -69,7 +70,7 @@ public class UserController {
      * @date 18:41 2019/12/3
      */
     @PutMapping("/update")
-    UserInfo updateUser(@RequestBody UserInfo userInfo) {
+    UserInfo updateUser(@RequestBody @Valid UserInfo userInfo) {
         return userService.updateUser(userInfo);
     }
 
