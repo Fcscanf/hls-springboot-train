@@ -41,7 +41,7 @@ public interface UserService {
      * @author Fcant
      * @date 18:40 2019/12/3
      */
-    int addUser(UserInfo userInfo);
+    UserInfo addUser(UserInfo userInfo);
 
     /**
      * 更新用户信息
@@ -51,7 +51,7 @@ public interface UserService {
      * @author Fcant
      * @date 18:41 2019/12/3
      */
-    int updateUser(UserInfo userInfo);
+    UserInfo updateUser(UserInfo userInfo);
 
     /**
      * 删除用户
@@ -61,5 +61,5 @@ public interface UserService {
      * @author Fcant
      * @date 18:41 2019/12/3
      */
-    int delUser(UserInfo userInfo);
+    UserInfo delUser(UserInfo userInfo);
 }

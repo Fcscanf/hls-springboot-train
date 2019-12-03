@@ -19,6 +19,11 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
+    /**
+     * 数据库操作失败的数字返回值
+     */
+    private final int FAILURE_CODE = 0;
+
     @Autowired
     UserMapper userMapper;
 
@@ -56,8 +61,12 @@ public class UserServiceImpl implements UserService {
      * @date 18:40 2019/12/3
      */
     @Override
-    public int addUser(UserInfo userInfo) {
-        return userMapper.addUser(userInfo);
+    public UserInfo addUser(UserInfo userInfo) {
+        int i = userMapper.addUser(userInfo);
+        if (i == FAILURE_CODE) {
+            return null;
+        }
+        return userInfo;
     }
 
     /**
@@ -69,8 +78,12 @@ public class UserServiceImpl implements UserService {
      * @date 18:41 2019/12/3
      */
     @Override
-    public int updateUser(UserInfo userInfo) {
-        return userMapper.updateUser(userInfo);
+    public UserInfo updateUser(UserInfo userInfo) {
+        int i = userMapper.updateUser(userInfo);
+        if (i == FAILURE_CODE) {
+            return null;
+        }
+        return userInfo;
     }
 
     /**
@@ -82,7 +95,12 @@ public class UserServiceImpl implements UserService {
      * @date 18:41 2019/12/3
      */
     @Override
-    public int delUser(UserInfo userInfo) {
-        return userMapper.delUser(userInfo);
+    public UserInfo delUser(UserInfo userInfo) {
+        int i = userMapper.delUser(userInfo);
+        if (i == FAILURE_CODE) {
+            return null;
+        }
+        userInfo = userMapper.selectUserById(userInfo.getUserId());
+        return userInfo;
     }
 }

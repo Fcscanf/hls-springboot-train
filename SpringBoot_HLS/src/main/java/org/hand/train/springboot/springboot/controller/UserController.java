@@ -55,8 +55,9 @@ public class UserController {
      * @date 18:40 2019/12/3
      */
     @PostMapping("/add")
-    int addUser(@RequestBody UserInfo userInfo) {
-        return userService.addUser(userInfo);
+    UserInfo addUser(@RequestBody UserInfo userInfo) {
+        userService.addUser(userInfo);
+        return userInfo;
     }
 
     /**
@@ -68,7 +69,7 @@ public class UserController {
      * @date 18:41 2019/12/3
      */
     @PutMapping("/update")
-    int updateUser(@RequestBody UserInfo userInfo) {
+    UserInfo updateUser(@RequestBody UserInfo userInfo) {
         return userService.updateUser(userInfo);
     }
 
@@ -81,7 +82,7 @@ public class UserController {
      * @date 18:41 2019/12/3
      */
     @DeleteMapping("/del")
-    int delUser(@RequestBody UserInfo userInfo) {
+    UserInfo delUser(@RequestBody UserInfo userInfo) {
         return userService.delUser(userInfo);
     }
 }

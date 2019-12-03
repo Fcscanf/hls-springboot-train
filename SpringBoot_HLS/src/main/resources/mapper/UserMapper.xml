@@ -33,7 +33,10 @@
             user_id =#{id}
     </select>
 
-    <insert id="addUser" keyProperty="userId" useGeneratedKeys="true" parameterType="org.hand.train.springboot.springboot.bean.UserInfo">
+    <insert id="addUser"
+            keyProperty="userId"
+            useGeneratedKeys="true"
+            parameterType="org.hand.train.springboot.springboot.bean.UserInfo">
         INSERT INTO user_info(user_id, user_name, age, create_time)
         VALUES (#{userId}, #{userName}, #{age}, #{createTime})
     </insert>
