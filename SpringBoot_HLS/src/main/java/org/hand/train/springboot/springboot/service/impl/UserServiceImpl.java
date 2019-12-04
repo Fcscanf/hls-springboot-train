@@ -5,6 +5,7 @@ import org.hand.train.springboot.springboot.mapper.UserMapper;
 import org.hand.train.springboot.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -60,6 +61,7 @@ public class UserServiceImpl implements UserService {
      * @author Fcant
      * @date 18:40 2019/12/3
      */
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public UserInfo addUser(UserInfo userInfo) {
         int i = userMapper.addUser(userInfo);
@@ -77,6 +79,7 @@ public class UserServiceImpl implements UserService {
      * @author Fcant
      * @date 18:41 2019/12/3
      */
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public UserInfo updateUser(UserInfo userInfo) {
         int i = userMapper.updateUser(userInfo);
@@ -94,6 +97,7 @@ public class UserServiceImpl implements UserService {
      * @author Fcant
      * @date 18:41 2019/12/3
      */
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public UserInfo delUser(UserInfo userInfo) {
         int i = userMapper.delUser(userInfo);

@@ -1,7 +1,6 @@
 package org.hand.train.springboot.springboot.mapper;
 
 import org.hand.train.springboot.springboot.bean.UserInfo;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -42,7 +41,6 @@ public interface UserMapper {
      * @author Fcant
      * @date 18:40 2019/12/3
      */
-    @Transactional(rollbackFor = Exception.class)
     int addUser(UserInfo userInfo);
 
     /**
@@ -53,7 +51,6 @@ public interface UserMapper {
      * @author Fcant
      * @date 18:41 2019/12/3
      */
-    @Transactional(rollbackFor = Exception.class)
     int updateUser(UserInfo userInfo);
 
     /**
@@ -64,6 +61,5 @@ public interface UserMapper {
      * @author Fcant
      * @date 18:41 2019/12/3
      */
-    @Transactional(rollbackFor = Exception.class)
     int delUser(UserInfo userInfo);
 }
