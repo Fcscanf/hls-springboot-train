@@ -1,11 +1,8 @@
 package org.hand.train.springboot.springboot.controller;
 
 import org.hand.train.springboot.springboot.bean.UserInfo;
-import org.hand.train.springboot.springboot.exception.GlobalException;
 import org.hand.train.springboot.springboot.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -60,14 +57,7 @@ public class UserController {
      */
     @PostMapping("/add")
     @Valid
-    UserInfo addUser(@RequestBody @Valid UserInfo userInfo, BindingResult bindingResult) throws GlobalException {
-        if (bindingResult.hasErrors()) {
-            String error_message = "";
-            for (ObjectError error : bindingResult.getAllErrors()) {
-                error_message += error.getDefaultMessage() + ",";
-            }
-            throw new GlobalException(error_message.substring(0, error_message.length() -1));
-        }
+    UserInfo addUser(@RequestBody @Valid UserInfo userInfo) {
         userService.addUser(userInfo);
         return userInfo;
     }
@@ -81,14 +71,7 @@ public class UserController {
      * @date 18:41 2019/12/3
      */
     @PutMapping("/update")
-    UserInfo updateUser(@RequestBody @Valid UserInfo userInfo, BindingResult bindingResult) throws GlobalException {
-        if (bindingResult.hasErrors()) {
-            String error_message = "";
-            for (ObjectError error : bindingResult.getAllErrors()) {
-                error_message += error.getDefaultMessage() + ",";
-            }
-            throw new GlobalException(error_message.substring(0, error_message.length() -1));
-        }
+    UserInfo updateUser(@RequestBody @Valid UserInfo userInfo) {
         return userService.updateUser(userInfo);
     }
 
