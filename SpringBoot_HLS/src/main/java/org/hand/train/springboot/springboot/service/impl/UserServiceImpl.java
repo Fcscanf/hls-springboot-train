@@ -28,39 +28,16 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     IUserMapper userMapper;
 
-    /**
-     * 查询所有用户
-     *
-     * @return List<UserInfo>
-     * @author Fcant
-     * @date 18:39 2019/12/3
-     */
     @Override
     public List<UserInfo> selectAllUser() {
         return userMapper.selectAllUser();
     }
 
-    /**
-     * 根据用户ID查询用户信息
-     *
-     * @param id
-     * @return UserInfo
-     * @author Fcant
-     * @date 18:40 2019/12/3
-     */
     @Override
     public UserInfo selectUserById(int id) {
         return userMapper.selectUserById(id);
     }
 
-    /**
-     * 添加用户
-     *
-     * @param userInfo
-     * @return int
-     * @author Fcant
-     * @date 18:40 2019/12/3
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public UserInfo addUser(UserInfo userInfo) {
@@ -71,14 +48,6 @@ public class UserServiceImpl implements IUserService {
         return userInfo;
     }
 
-    /**
-     * 更新用户信息
-     *
-     * @param userInfo
-     * @return int
-     * @author Fcant
-     * @date 18:41 2019/12/3
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public UserInfo updateUser(UserInfo userInfo) {
@@ -89,14 +58,6 @@ public class UserServiceImpl implements IUserService {
         return userInfo;
     }
 
-    /**
-     * 删除用户
-     *
-     * @param userInfo
-     * @return int
-     * @author Fcant
-     * @date 18:41 2019/12/3
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public UserInfo delUser(UserInfo userInfo) {
