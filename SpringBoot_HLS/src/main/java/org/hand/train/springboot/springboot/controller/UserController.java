@@ -57,7 +57,6 @@ public class UserController {
      * @date 18:40 2019/12/3
      */
     @PostMapping()
-    @Valid
     UserInfo addUser(@RequestBody @Valid UserInfo userInfo) {
         userService.addUser(userInfo);
         return userInfo;
