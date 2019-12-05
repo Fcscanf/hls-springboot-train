@@ -1,6 +1,7 @@
 package org.hand.train.springboot.springboot.mapper;
 
 import org.hand.train.springboot.springboot.bean.UserInfo;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * @author Fcant
  * @date 17:20 2019/12/3
  */
+@Repository
 public interface IUserMapper {
 
     /**
