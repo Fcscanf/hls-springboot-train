@@ -17,6 +17,7 @@ import java.util.List;
  * @date 17:25 2019/12/3
  */
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -29,7 +30,7 @@ public class UserController {
      * @author Fcant
      * @date 18:39 2019/12/3
      */
-    @GetMapping("/getall")
+    @GetMapping()
     public List<UserInfo> selectAllUser() {
         return userService.selectAllUser();
     }
@@ -42,7 +43,7 @@ public class UserController {
      * @author Fcant
      * @date 18:40 2019/12/3
      */
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     UserInfo selectUserById(@PathVariable int id) {
         return userService.selectUserById(id);
     }
@@ -55,7 +56,7 @@ public class UserController {
      * @author Fcant
      * @date 18:40 2019/12/3
      */
-    @PostMapping("/add")
+    @PostMapping()
     @Valid
     UserInfo addUser(@RequestBody @Valid UserInfo userInfo) {
         userService.addUser(userInfo);
@@ -83,7 +84,7 @@ public class UserController {
      * @author Fcant
      * @date 18:41 2019/12/3
      */
-    @DeleteMapping("/del")
+    @DeleteMapping()
     UserInfo delUser(@RequestBody UserInfo userInfo) {
         return userService.delUser(userInfo);
     }
