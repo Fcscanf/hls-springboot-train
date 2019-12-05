@@ -1,18 +1,18 @@
-package org.hand.train.springboot.springboot.service;
+package org.hand.train.springboot.springboot.mapper;
 
 import org.hand.train.springboot.springboot.bean.UserInfo;
 
 import java.util.List;
 
 /**
- * UserService
+ * UserMapper
  * <p>
  * encoding:UTF-8
  *
  * @author Fcant
- * @date 17:25 2019/12/3
+ * @date 17:20 2019/12/3
  */
-public interface UserService {
+public interface IUserMapper {
 
     /**
      * 查询所有用户
@@ -41,7 +41,7 @@ public interface UserService {
      * @author Fcant
      * @date 18:40 2019/12/3
      */
-    UserInfo addUser(UserInfo userInfo);
+    int addUser(UserInfo userInfo);
 
     /**
      * 更新用户信息
@@ -51,7 +51,7 @@ public interface UserService {
      * @author Fcant
      * @date 18:41 2019/12/3
      */
-    UserInfo updateUser(UserInfo userInfo);
+    int updateUser(UserInfo userInfo);
 
     /**
      * 删除用户
@@ -61,5 +61,5 @@ public interface UserService {
      * @author Fcant
      * @date 18:41 2019/12/3
      */
-    UserInfo delUser(UserInfo userInfo);
+    int delUser(UserInfo userInfo);
 }

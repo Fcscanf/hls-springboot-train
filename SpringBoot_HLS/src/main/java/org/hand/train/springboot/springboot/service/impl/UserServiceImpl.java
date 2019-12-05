@@ -1,8 +1,8 @@
 package org.hand.train.springboot.springboot.service.impl;
 
 import org.hand.train.springboot.springboot.bean.UserInfo;
-import org.hand.train.springboot.springboot.mapper.UserMapper;
-import org.hand.train.springboot.springboot.service.UserService;
+import org.hand.train.springboot.springboot.mapper.IUserMapper;
+import org.hand.train.springboot.springboot.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +18,7 @@ import java.util.List;
  * @date 17:27 2019/12/3
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements IUserService {
 
     /**
      * 数据库操作失败的数字返回值
@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     private final int FAILURE_CODE = 0;
 
     @Autowired
-    UserMapper userMapper;
+    IUserMapper userMapper;
 
     /**
      * 查询所有用户
