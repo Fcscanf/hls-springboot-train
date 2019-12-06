@@ -1,6 +1,7 @@
 package org.hand.train.springboot.springboot.service.impl;
 
 import org.hand.train.springboot.springboot.bean.UserInfo;
+import org.hand.train.springboot.springboot.cache.IUserCache;
 import org.hand.train.springboot.springboot.mapper.IUserMapper;
 import org.hand.train.springboot.springboot.service.IUserService;
 import org.slf4j.Logger;
@@ -10,7 +11,6 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,15 +36,21 @@ public class UserServiceImpl implements IUserService {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
-    private StringRedisTemplate redisTemplate;
+    private IUserCache userCache;
 
     @Autowired
     IUserMapper userMapper;
 
     @Override
     public List<UserInfo> selectAllUser() {
-        LOGGER.info("从数据库查询所有用户信息");
-        return userMapper.selectAllUser();
+        List<UserInfo> usersList;
+        usersList = userCache.getUsersList("userList");
+        if (usersList.isEmpty()) {
+            LOGGER.info("从数据库查询所有用户信息");
+            usersList = userMapper.selectAllUser();
+            userCache.listUsersSave("userList", usersList);
+        }
+        return usersList;
     }
 
     @Cacheable(cacheNames = "user", key = "#id")
