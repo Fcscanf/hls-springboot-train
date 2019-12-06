@@ -77,7 +77,7 @@ public class UserController {
      * @date 18:41 2019/12/3
      */
     @ApiOperation(value = "更新用户信息")
-    @PutMapping("/update")
+    @PutMapping()
     UserInfo updateUser(@RequestBody @Valid UserInfo userInfo) {
         return userService.updateUser(userInfo);
     }
