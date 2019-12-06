@@ -4,7 +4,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.hand.train.springboot.springboot.bean.UserInfo;
 import org.hand.train.springboot.springboot.service.impl.UserServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,8 +22,11 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    UserServiceImpl userService;
+    private final UserServiceImpl userService;
+
+    public UserController(UserServiceImpl userService) {
+        this.userService = userService;
+    }
 
     /**
      * 查询所有用户

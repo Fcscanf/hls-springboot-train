@@ -3,7 +3,6 @@ package org.hand.train.springboot.springboot.cache.impl;
 import com.google.gson.Gson;
 import org.hand.train.springboot.springboot.bean.UserInfo;
 import org.hand.train.springboot.springboot.cache.IUserCache;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
@@ -21,14 +20,17 @@ import java.util.List;
 @Service
 public class IUserCacheImpl implements IUserCache {
 
-    @Autowired
-    private StringRedisTemplate redisTemplate;
+    private final StringRedisTemplate redisTemplate;
+
+    public IUserCacheImpl(StringRedisTemplate redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
     /**
      * 将查询到的Users的List集合缓存到Redis
      *
-     * @param key
-     * @param userInfoList
+     * @param key 缓存的Key
+     * @param userInfoList 缓存的集合
      * @author Fcant 10:21 2019/12/6
      */
     @Override
@@ -41,7 +43,7 @@ public class IUserCacheImpl implements IUserCache {
     /**
      * 从缓存中获取用户集合
      *
-     * @param key
+     * @param key 获取缓存的key
      * @return List<UserInfo>
      * @author Fcant 10:25 2019/12/6
      */
