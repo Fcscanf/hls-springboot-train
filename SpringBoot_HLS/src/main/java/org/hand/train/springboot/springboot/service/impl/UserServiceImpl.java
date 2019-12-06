@@ -3,7 +3,14 @@ package org.hand.train.springboot.springboot.service.impl;
 import org.hand.train.springboot.springboot.bean.UserInfo;
 import org.hand.train.springboot.springboot.mapper.IUserMapper;
 import org.hand.train.springboot.springboot.service.IUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +25,7 @@ import java.util.List;
  * @date 17:27 2019/12/3
  */
 @Service
+@CacheConfig(cacheNames = "user", cacheManager = "userCacheManager")
 public class UserServiceImpl implements IUserService {
 
     /**
@@ -25,19 +33,36 @@ public class UserServiceImpl implements IUserService {
      */
     private final int FAILURE_CODE = 0;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
+
+    @Autowired
+    private StringRedisTemplate redisTemplate;
+
     @Autowired
     IUserMapper userMapper;
 
     @Override
     public List<UserInfo> selectAllUser() {
+        LOGGER.info("从数据库查询所有用户信息");
         return userMapper.selectAllUser();
     }
 
+    @Cacheable(cacheNames = "user", key = "#id")
     @Override
     public UserInfo selectUserById(int id) {
+        LOGGER.info("从数据库查询ID为 {} 的用户" , id);
         return userMapper.selectUserById(id);
     }
 
+    /**
+     * 添加用户
+     * 此处缓存主键使用Mybatis回填的自增主键
+     *
+     * @param userInfo
+     * @return UserInfo
+     * @author Fcant 9:22 2019/12/6
+     */
+    @CachePut(cacheNames = "user", key = "#result.userId")
     @Transactional(rollbackFor = Exception.class)
     @Override
     public UserInfo addUser(UserInfo userInfo) {
@@ -48,6 +73,7 @@ public class UserServiceImpl implements IUserService {
         return userInfo;
     }
 
+    @CachePut(cacheNames = "user", key = "#userInfo.userId")
     @Transactional(rollbackFor = Exception.class)
     @Override
     public UserInfo updateUser(UserInfo userInfo) {
@@ -58,6 +84,7 @@ public class UserServiceImpl implements IUserService {
         return userInfo;
     }
 
+    @CacheEvict(beforeInvocation = true, cacheNames = "user", key = "#userInfo.userId")
     @Transactional(rollbackFor = Exception.class)
     @Override
     public UserInfo delUser(UserInfo userInfo) {
