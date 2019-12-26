@@ -18,6 +18,7 @@ import java.util.List;
  * @date 17:25 2019/12/3
  */
 @Api
+@CrossOrigin
 @RestController
 @RequestMapping("/user")
 public class UserController {
