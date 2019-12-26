@@ -33,6 +33,8 @@ public class UserServiceImpl implements IUserService {
      */
     private final int FAILURE_CODE = 0;
 
+    private boolean reFresh = false;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
@@ -46,6 +48,10 @@ public class UserServiceImpl implements IUserService {
         List<UserInfo> usersList;
         usersList = userCache.getUsersList("userList");
         if (usersList.isEmpty()) {
+            LOGGER.info("从数据库查询所有用户信息");
+            usersList = userMapper.selectAllUser();
+            userCache.listUsersSave("userList", usersList);
+        } else if (reFresh) {
             LOGGER.info("从数据库查询所有用户信息");
             usersList = userMapper.selectAllUser();
             userCache.listUsersSave("userList", usersList);
@@ -76,6 +82,7 @@ public class UserServiceImpl implements IUserService {
         if (i == FAILURE_CODE) {
             return null;
         }
+        reFresh = true;
         return userInfo;
     }
 
@@ -87,6 +94,7 @@ public class UserServiceImpl implements IUserService {
         if (i == FAILURE_CODE) {
             return null;
         }
+        reFresh = true;
         return userInfo;
     }
 
@@ -98,6 +106,7 @@ public class UserServiceImpl implements IUserService {
         if (i == FAILURE_CODE) {
             return null;
         }
+        reFresh = true;
         userInfo = userMapper.selectUserById(userInfo.getUserId());
         return userInfo;
     }
