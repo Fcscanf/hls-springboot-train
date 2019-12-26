@@ -1,8 +1,10 @@
 package org.hand.train.springboot.springboot.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
@@ -30,6 +32,8 @@ public class UserInfo {
     @Max(value = 120, message = "年龄不能超过120岁，否则不合法")
     private int age;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @ApiModelProperty(name = "用户创建时间", hidden = true)
     private Date createTime;
 }
