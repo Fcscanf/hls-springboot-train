@@ -18,11 +18,11 @@ import java.util.List;
  * @author Fcant 10:26 2019/12/6
  */
 @Service
-public class IUserCacheImpl implements IUserCache {
+public class UserCacheImpl implements IUserCache {
 
     private final StringRedisTemplate redisTemplate;
 
-    public IUserCacheImpl(StringRedisTemplate redisTemplate) {
+    public UserCacheImpl(StringRedisTemplate redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 
