@@ -11,7 +11,7 @@
         <result column="create_time" javaType="java.sql.Date" property="createTime"/>
     </resultMap>
 
-    <select id="selectAllUser" resultMap="BaseResult">
+    <select id="selectAllUser" parameterType="org.hand.train.springboot.springboot.bean.UserInfo" resultMap="BaseResult">
         SELECT
             user_id,
             user_name,
@@ -19,6 +19,14 @@
             create_time
         FROM
 	        user_info
+        <where>
+            <if test="id" >
+                and user_id = #{id}
+            </if>
+            <if test="username != null" >
+                and user_name LIKE concat('%', #{username} ,'%')
+            </if>
+        </where>
     </select>
 
     <select id="selectUserById" parameterType="int" resultMap="BaseResult">

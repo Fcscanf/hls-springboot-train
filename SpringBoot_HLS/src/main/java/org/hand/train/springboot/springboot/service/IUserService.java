@@ -21,7 +21,7 @@ public interface IUserService {
      * @author Fcant
      * @date 18:39 2019/12/3
      */
-    List<UserInfo> selectAllUser();
+    List<UserInfo> selectAllUser(UserInfo userInfo);
 
     /**
      * 根据用户ID查询用户信息

@@ -38,8 +38,8 @@ public class UserController {
      */
     @ApiOperation(value = "查询所有用户")
     @GetMapping()
-    public List<UserInfo> selectAllUser() {
-        return userService.selectAllUser();
+    public List<UserInfo> selectAllUser(UserInfo userInfo) {
+        return userService.selectAllUser(userInfo);
     }
 
     /**

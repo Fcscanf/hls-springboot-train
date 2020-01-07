@@ -44,16 +44,16 @@ public class UserServiceImpl implements IUserService {
     IUserMapper userMapper;
 
     @Override
-    public List<UserInfo> selectAllUser() {
+    public List<UserInfo> selectAllUser(UserInfo userInfo) {
         List<UserInfo> usersList;
         usersList = userCache.getUsersList("userList");
         if (usersList.isEmpty()) {
             LOGGER.info("从数据库查询所有用户信息");
-            usersList = userMapper.selectAllUser();
+            usersList = userMapper.selectAllUser(userInfo);
             userCache.listUsersSave("userList", usersList);
         } else if (reFresh) {
             LOGGER.info("从数据库查询所有用户信息");
-            usersList = userMapper.selectAllUser();
+            usersList = userMapper.selectAllUser(userInfo);
             userCache.listUsersSave("userList", usersList);
         }
         return usersList;
